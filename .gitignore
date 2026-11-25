@@ -1,0 +1,11 @@
+# secrets
+*.token
+.env
+.git-credentials
+
+# temp
+*.log
+*.tar.gz
+
+# OS
+.DS_Store

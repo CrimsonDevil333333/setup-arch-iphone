@@ -332,6 +332,12 @@ if [[ "$INSTALL_OPENCODE" == "1" ]]; then
   fi
   # ensure PATH
   grep -q '.opencode/bin' /root/.zshrc 2>/dev/null || true
+  # shell completions
+  if command -v opencode >/dev/null 2>&1; then
+    mkdir -p /usr/share/zsh/site-functions /etc/bash_completion.d
+    opencode --completions zsh > /usr/share/zsh/site-functions/_opencode 2>/dev/null || true
+    opencode --completions bash > /etc/bash_completion.d/opencode 2>/dev/null || true
+  fi
 fi
 
 # ---------- Helper scripts ----------
