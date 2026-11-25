@@ -1,0 +1,57 @@
+# ~/.bashrc
+[[ $- != *i* ]] && return
+
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export EDITOR="${EDITOR:-nvim}"
+export VISUAL="$EDITOR"
+export PAGER="${PAGER:-less}"
+
+export PATH="$HOME/.local/bin:$HOME/bin:/opt/code-server/bin:$HOME/.opencode/bin:$PATH"
+
+HISTFILE="$HOME/.bash_history"
+HISTSIZE=50000
+HISTFILESIZE=50000
+shopt -s histappend
+shopt -s checkwinsize
+
+# fzf
+[ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
+[ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
+
+# starship
+command -v starship >/dev/null 2>&1 && eval "$(starship init bash)"
+
+# aliases
+alias c='clear'
+alias e='exit'
+alias q='exit'
+alias r='source ~/.bashrc'
+alias h='history'
+alias j='jobs -l'
+alias path='echo $PATH | tr ":" "\\n"'
+alias now='date +"%Y-%m-%d %H:%M:%S"'
+alias ports='ss -tulpn'
+alias myip='curl -s https://ifconfig.me; echo'
+alias ls='ls --color=auto'
+alias ll='ls -lah'
+alias la='ls -A'
+alias grep='grep --color=auto'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias g='git'
+alias gs='git status -sb'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline --graph --decorate -20'
+alias v='nvim'
+alias code='code-server'
+alias ff='fastfetch'
+alias update='pacman -Syu'
+alias reload='source ~/.bashrc'
+alias updates='checkupdates 2>/dev/null || pacman -Qu'
+alias upgrade='sys-update'
+alias cleanup='sys-cleanup'
+alias code-update='code-server-update'
+alias fullupgrade='sys-update && code-server-update && sys-cleanup'
+command -v tree >/dev/null 2>&1 && alias tree='tree -C'

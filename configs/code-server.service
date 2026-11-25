@@ -1,0 +1,14 @@
+[Unit]
+Description=code-server (VS Code in browser)
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root
+ExecStart=/opt/code-server/bin/code-server
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
