@@ -191,7 +191,7 @@ status() {
   print -P "%F{green}devbox status%f"
   print -P "%F{cyan}User%f:      $(whoami) @ $(hostname)"
   print -P "%F{cyan}Uptime%f:   $(uptime -p 2>/dev/null || uptime)"
-  print -P "%F{cyan}Disk%f:     $(df -h / | awk 'NR==2{print $3" / "$2" ("$5")"}')"
+  print -P "%F{cyan}Disk%f:     $(df -h / | awk 'NR==2{print $3" / "$2" ("$5")"}' | sed 's/%/%%/g')"
   print -P "%F{cyan}Memory%f:   $(free -h | awk '/^Mem:/{print $3" / "$2}')"
   print -P ""
   print -P "%F{yellow}OpenCode%f:  $(opencode service status 2>/dev/null || echo 'not running')"
