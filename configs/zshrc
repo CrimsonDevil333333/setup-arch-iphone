@@ -188,12 +188,21 @@ tips() {
   print -P "  %F{white}gl%f log  %F{white}gco%f checkout  %F{white}mkcd%f  %F{white}extract%f"
   print -P "%F{yellow}Dev & System%f"
   print -P "  %F{white}v%f nvim  %F{white}code/cs%f code-server  %F{white}t%f tmux"
+  print -P "  %F{white}oc%f opencode  %F{white}ocs%f serve  %F{white}ocp%f pair remote"
   print -P "  %F{white}ff%f fastfetch  %F{white}top%f btop  %F{white}sys%f procs"
   print -P "  %F{white}update/upgrade%f  %F{white}updates%f  %F{white}cleanup%f"
   print -P "  %F{white}code-update%f  %F{white}fullupgrade%f  %F{white}tips%f  %F{white}help%f"
   print -P "%F{yellow}Disk / Perf%f"
   print -P "  %F{white}ncdu%f  %F{white}duf%f  %F{white}dust%f  %F{white}bench%f  %F{white}loc%f"
 }
+
+# ---- OpenCode auto-start ----
+if command -v opencode >/dev/null 2>&1; then
+  opencode service start >/dev/null 2>&1
+fi
+alias oc='opencode'
+alias ocs='opencode service start'
+alias ocp='opencode pair --remote --yes'
 
 # ---- Custom greeting (compact, phone-friendly) ----
 __dev_greet() {

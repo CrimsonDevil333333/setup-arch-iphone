@@ -11,6 +11,7 @@ SWAP_SIZE="${SWAP_SIZE:-0}"          # GB; 0 disables swap
 CODE_SERVER_AUTH="${CODE_SERVER_AUTH:-none}"  # none | password
 CODE_SERVER_VERSION="${CODE_SERVER_VERSION:-latest}"
 INSTALL_CODE_SERVER="${INSTALL_CODE_SERVER:-1}"
+INSTALL_OPENCODE="${INSTALL_OPENCODE:-1}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$SCRIPT_DIR/configs"
@@ -99,7 +100,7 @@ do_code_update() {
 do_validate() {
   local fail=0
   echo "=== Validation ==="
-  for cmd in git node python3 zsh tmux nvim docker code-server starship; do
+  for cmd in git node python3 zsh tmux nvim docker code-server starship opencode; do
     if command -v "$cmd" >/dev/null 2>&1; then
       printf '  [OK] %-14s %s\n' "$cmd" "$(command -v $cmd)"
     else
@@ -168,6 +169,7 @@ if [[ $DRY_RUN -eq 1 ]]; then
   echo "  - install shell/editor configs"
   echo "  - git identity: $GIT_NAME <$GIT_EMAIL>"
   echo "  - install code-server (if enabled) and configure auth: $CODE_SERVER_AUTH"
+  echo "  - install OpenCode (if enabled)"
   echo "  - enable docker, install helper scripts"
   echo "  - generate SSH key if missing"
   echo "  - sync configs to alarm user"
@@ -318,6 +320,18 @@ fi
 # ---------- makepkg parallel builds ----------
 if grep -q '^#MAKEFLAGS=' /etc/makepkg.conf; then
   sed -i 's/^#MAKEFLAGS=.*/MAKEFLAGS="-j'"$(nproc)"'"/' /etc/makepkg.conf
+fi
+
+# ---------- OpenCode ----------
+if [[ "$INSTALL_OPENCODE" == "1" ]]; then
+  if [[ ! -x /root/.opencode/bin/opencode ]]; then
+    log "Installing OpenCode..."
+    run bash -c 'curl -fsSL https://opencode.ai/v2/install | bash'
+  else
+    log "OpenCode already installed, skipping."
+  fi
+  # ensure PATH
+  grep -q '.opencode/bin' /root/.zshrc 2>/dev/null || true
 fi
 
 # ---------- Helper scripts ----------

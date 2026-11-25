@@ -26,6 +26,7 @@ sudo ./install.sh
 - Shell: zsh + autosuggestions + syntax highlighting + starship prompt
 - CLI goodies: fzf, ripgrep, fd, bat, eza, zoxide, tree, ncdu, duf, dust, procs, tldr, hyperfine, tokei, cloc, git-delta, xh, ...
 - code-server (VS Code in browser) on port 8080
+- OpenCode (auto-starts serving on shell open)
 - Locale, hostname, SSH key, makepkg parallel builds
 - Compact fastfetch config tuned for narrow phone screens
 
@@ -50,6 +51,7 @@ Run `./install.sh --help` for full list.
 | `SWAP_SIZE` | `0` | Swap file size in GB (0 = disabled) |
 | `CODE_SERVER_AUTH` | `none` | `none` or `password` |
 | `INSTALL_CODE_SERVER` | `1` | Set to `0` to skip code-server |
+| `INSTALL_OPENCODE` | `1` | Set to `0` to skip OpenCode |
 | `CODE_SERVER_VERSION` | `latest` | code-server release tag |
 
 Example:

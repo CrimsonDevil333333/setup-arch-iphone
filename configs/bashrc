@@ -47,6 +47,13 @@ alias gp='git push'
 alias gl='git log --oneline --graph --decorate -20'
 alias v='nvim'
 alias code='code-server'
+# OpenCode auto-start
+if command -v opencode >/dev/null 2>&1; then
+  opencode service start >/dev/null 2>&1
+fi
+alias oc='opencode'
+alias ocs='opencode service start'
+alias ocp='opencode pair --remote --yes'
 alias ff='fastfetch'
 alias update='pacman -Syu'
 alias reload='source ~/.bashrc'
