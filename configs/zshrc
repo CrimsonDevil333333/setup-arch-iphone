@@ -182,6 +182,24 @@ extract() {
 }
 gclone() { git clone "$1" && cd "$(basename "$1" .git)"; }
 
+# ---- Status command ----
+status() {
+  echo "=== devbox status ==="
+  echo "Host: $(hostname)  Uptime: $(uptime -p 2>/dev/null || uptime)"
+  echo "Disk: $(df -h / | awk 'NR==2{print $3"/"$2" ("$5")"}')"
+  echo "Mem:  $(free -h | awk '/^Mem:/{print $3"/"$2}')"
+  echo ""
+  echo "OpenCode:    $(opencode service status 2>/dev/null || echo 'not running')"
+  echo "code-server: $(systemctl is-active code-server 2>/dev/null || echo 'unknown')"
+  echo "Docker:      $(systemctl is-active docker 2>/dev/null || echo 'unknown')"
+  if command -v swipterm >/dev/null 2>&1; then
+    echo "Caffeinate:  $(swipterm caffeinate status 2>/dev/null || echo 'unknown')"
+  fi
+  echo ""
+  echo "Listening ports:"
+  ss -tulpn 2>/dev/null | grep LISTEN | head -20
+}
+
 # ---- Quick tips ----
 tips() {
   print -P "%F{green}devbox shortcuts%f"
@@ -197,7 +215,8 @@ tips() {
   print -P "  %F{white}caffeinate-on/off/status%f Swipterm background"
   print -P "  %F{white}ff%f fastfetch  %F{white}top%f btop  %F{white}sys%f procs"
   print -P "  %F{white}update/upgrade%f  %F{white}updates%f  %F{white}cleanup%f"
-  print -P "  %F{white}code-update%f  %F{white}fullupgrade%f  %F{white}tips%f  %F{white}help%f"
+  print -P "  %F{white}code-update%f  %F{white}fullupgrade%f"
+  print -P "  %F{white}status%f  %F{white}tips%f  %F{white}help%f"
   print -P "%F{yellow}Disk / Perf%f"
   print -P "  %F{white}ncdu%f  %F{white}duf%f  %F{white}dust%f  %F{white}bench%f  %F{white}loc%f"
 }

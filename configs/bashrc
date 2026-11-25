@@ -63,6 +63,22 @@ alias caffeinate='swipterm caffeinate'
 alias caffeinate-on='swipterm caffeinate on'
 alias caffeinate-off='swipterm caffeinate off'
 alias caffeinate-status='swipterm caffeinate status'
+status() {
+  echo "=== devbox status ==="
+  echo "Host: $(hostname)  Uptime: $(uptime -p 2>/dev/null || uptime)"
+  echo "Disk: $(df -h / | awk 'NR==2{print $3"/"$2" ("$5")"}')"
+  echo "Mem:  $(free -h | awk '/^Mem:/{print $3"/"$2}')"
+  echo ""
+  echo "OpenCode:    $(opencode service status 2>/dev/null || echo 'not running')"
+  echo "code-server: $(systemctl is-active code-server 2>/dev/null || echo 'unknown')"
+  echo "Docker:      $(systemctl is-active docker 2>/dev/null || echo 'unknown')"
+  if command -v swipterm >/dev/null 2>&1; then
+    echo "Caffeinate:  $(swipterm caffeinate status 2>/dev/null || echo 'unknown')"
+  fi
+  echo ""
+  echo "Listening ports:"
+  ss -tulpn 2>/dev/null | grep LISTEN | head -20
+}
 alias ff='fastfetch'
 alias update='pacman -Syu'
 alias reload='source ~/.bashrc'
