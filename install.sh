@@ -136,12 +136,12 @@ banner() {
 }
 banner
 
-if [[ $EUID -ne 0 ]]; then
+if [[ $DRY_RUN -ne 1 && $EUID -ne 0 ]]; then
   err "Please run as root (sudo ./install.sh)"
   exit 1
 fi
 
-if ! command -v pacman >/dev/null 2>&1; then
+if [[ $DRY_RUN -ne 1 ]] && ! command -v pacman >/dev/null 2>&1; then
   err "pacman not found - this script targets Arch Linux"
   exit 1
 fi

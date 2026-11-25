@@ -1,0 +1,33 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Syntax check shell scripts
+        run: |
+          bash -n install.sh
+          for f in scripts/*.sh; do bash -n "$f"; done
+
+      - name: Check required files
+        run: |
+          test -f configs/zshrc
+          test -f configs/bashrc
+          test -f configs/vimrc
+          test -f configs/tmux.conf
+          test -f configs/starship.toml
+          test -f configs/fastfetch_config.jsonc
+          test -f configs/code-server_config.yaml
+          test -f LICENSE
+          test -f README.md
+
+      - name: Dry-run help
+        run: |
+          ./install.sh --help
+          ./install.sh --dry-run
