@@ -8,6 +8,7 @@ export VISUAL="$EDITOR"
 export PAGER="${PAGER:-less}"
 
 export PATH="$HOME/.local/bin:$HOME/bin:/opt/code-server/bin:$HOME/.opencode/bin:$PATH"
+export GITHUB_TOKEN="$(cat "$HOME/.config/github/token" 2>/dev/null)"
 
 HISTFILE="$HOME/.bash_history"
 HISTSIZE=50000

@@ -10,6 +10,8 @@ export LESS="-RFX"
 
 # PATH
 export PATH="$HOME/.local/bin:$HOME/bin:/opt/code-server/bin:$HOME/.opencode/bin:$PATH"
+# GitHub token (stored in ~/.config/github/token)
+export GITHUB_TOKEN="$(cat "$HOME/.config/github/token" 2>/dev/null)"
 # Go/Rust if installed
 [ -d /usr/local/go/bin ] && export PATH="/usr/local/go/bin:$PATH"
 [ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
