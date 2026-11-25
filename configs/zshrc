@@ -70,6 +70,11 @@ alias myip='curl -s https://ifconfig.me; echo'
 alias please='sudo'
 alias x='exit'
 alias help='tips'
+# Swipterm background execution
+alias caffeinate='swipterm caffeinate'
+alias caffeinate-on='swipterm caffeinate on'
+alias caffeinate-off='swipterm caffeinate off'
+alias caffeinate-status='swipterm caffeinate status'
 # updates
 alias updates='checkupdates 2>/dev/null || pacman -Qu'
 alias upgrade='sys-update'
@@ -189,6 +194,7 @@ tips() {
   print -P "%F{yellow}Dev & System%f"
   print -P "  %F{white}v%f nvim  %F{white}code/cs%f code-server  %F{white}t%f tmux"
   print -P "  %F{white}oc%f opencode  %F{white}ocs%f serve  %F{white}ocp%f pair remote"
+  print -P "  %F{white}caffeinate-on/off/status%f Swipterm background"
   print -P "  %F{white}ff%f fastfetch  %F{white}top%f btop  %F{white}sys%f procs"
   print -P "  %F{white}update/upgrade%f  %F{white}updates%f  %F{white}cleanup%f"
   print -P "  %F{white}code-update%f  %F{white}fullupgrade%f  %F{white}tips%f  %F{white}help%f"

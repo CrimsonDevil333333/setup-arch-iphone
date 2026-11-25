@@ -52,6 +52,7 @@ Run `./install.sh --help` for full list.
 | `CODE_SERVER_AUTH` | `none` | `none` or `password` |
 | `INSTALL_CODE_SERVER` | `1` | Set to `0` to skip code-server |
 | `INSTALL_OPENCODE` | `1` | Set to `0` to skip OpenCode |
+| `SWIPTERM_CAFFEINATE` | `0` | Set to `1` to enable Swipterm background execution |
 | `CODE_SERVER_VERSION` | `latest` | code-server release tag |
 
 Example:
@@ -65,6 +66,17 @@ sudo GIT_NAME="Jane Doe" GIT_EMAIL="jane@example.com" SWAP_SIZE=2 CODE_SERVER_AU
 - Open a new shell to see the greeting.
 - Type `tips` (or `help`) for shortcuts.
 - code-server: `http://<device-ip>:8080`
+
+## Swipterm
+
+Official project: https://github.com/swipt-automation/Swipterm
+
+Background execution:
+```bash
+swipterm caffeinate on
+swipterm caffeinate status
+swipterm caffeinate off
+```
 
 ## Files
 

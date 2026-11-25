@@ -12,6 +12,7 @@ CODE_SERVER_AUTH="${CODE_SERVER_AUTH:-none}"  # none | password
 CODE_SERVER_VERSION="${CODE_SERVER_VERSION:-latest}"
 INSTALL_CODE_SERVER="${INSTALL_CODE_SERVER:-1}"
 INSTALL_OPENCODE="${INSTALL_OPENCODE:-1}"
+SWIPTERM_CAFFEINATE="${SWIPTERM_CAFFEINATE:-0}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$SCRIPT_DIR/configs"
@@ -337,6 +338,17 @@ if [[ "$INSTALL_OPENCODE" == "1" ]]; then
     mkdir -p /usr/share/zsh/site-functions /etc/bash_completion.d
     opencode --completions zsh > /usr/share/zsh/site-functions/_opencode 2>/dev/null || true
     opencode --completions bash > /etc/bash_completion.d/opencode 2>/dev/null || true
+  fi
+fi
+
+# ---------- Swipterm background execution ----------
+if command -v swipterm >/dev/null 2>&1; then
+  if [[ "$SWIPTERM_CAFFEINATE" == "1" ]]; then
+    swipterm caffeinate on >/dev/null 2>&1 || true
+    log "Swipterm caffeinate enabled."
+  elif [[ $INTERACTIVE -eq 1 ]] && ask "Enable Swipterm background execution (caffeinate)?"; then
+    swipterm caffeinate on >/dev/null 2>&1 || true
+    log "Swipterm caffeinate enabled."
   fi
 fi
 
