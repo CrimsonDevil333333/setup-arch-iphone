@@ -70,9 +70,3 @@ sudo GIT_NAME="Jane Doe" GIT_EMAIL="jane@example.com" SWAP_SIZE=2 CODE_SERVER_AU
 - `install.sh` - the one-shot installer
 - `scripts/` - helper scripts (update, cleanup, code-server update)
 - `.github/workflows/validate.yml` - CI validation
-
-## Token storage (maintainers)
-
-Store your GitHub token in `~/.config/github/token` (mode 600).
-The shell config reads it into `GITHUB_TOKEN` automatically.
-Never commit tokens to the repo.
