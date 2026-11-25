@@ -12,18 +12,10 @@ cd setup-arch-iphone
 sudo ./install.sh
 ```
 
-## Quick start
+## Quick start (without cloning)
 
 ```bash
-git clone <your-repo> setup-arch-iphone
-cd setup-arch-iphone
-sudo ./install.sh
-```
-
-Or without git:
-
-```bash
-curl -fsSL <url>/install.sh -o install.sh
+curl -fsSL https://raw.githubusercontent.com/CrimsonDevil333333/setup-arch-iphone/main/install.sh -o install.sh
 chmod +x install.sh
 sudo ./install.sh
 ```
