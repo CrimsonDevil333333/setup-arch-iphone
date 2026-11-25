@@ -196,10 +196,15 @@ tips() {
   print -P "  %F{white}ncdu%f  %F{white}duf%f  %F{white}dust%f  %F{white}bench%f  %F{white}loc%f"
 }
 
-# ---- OpenCode auto-start ----
-if command -v opencode >/dev/null 2>&1; then
-  opencode service start >/dev/null 2>&1
-fi
+# ---- OpenCode auto-start (background, silent) ----
+__opencode_autostart() {
+  (
+    command -v opencode >/dev/null 2>&1 || exit 0
+    opencode service status >/dev/null 2>&1 && exit 0
+    opencode service start >/dev/null 2>&1
+  ) >/dev/null 2>&1 &
+}
+__opencode_autostart
 alias oc='opencode'
 alias ocs='opencode service start'
 alias ocp='opencode pair --remote --yes'
